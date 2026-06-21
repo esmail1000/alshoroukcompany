@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-blue: #2f8dca;
+  --brand-deep: #176fa8;
+  --brand-navy: #102a43;
+  --brand-brick: #b33a1c;
+  --brand-concrete: #f3f4f6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: #1f2937;
+  background: #ffffff;
+  font-family: "Cairo", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body:has([dir="ltr"]) {
+  font-family: "Inter", "Cairo", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+::selection {
+  background: rgba(47, 141, 202, 0.22);
+}
+
+.container-padded {
+  width: min(1120px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+.section-padding {
+  padding-block: 88px;
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding-block: 64px;
+  }
+}
+
+.brick-pattern {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.08) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255,255,255,0.08) 2px, transparent 2px);
+  background-size: 58px 32px;
+}
+
+.reveal {
+  animation: fadeUp 0.75s ease both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.image-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(16,42,67,0.05), rgba(16,42,67,0.55));
+  pointer-events: none;
+}
+
+.form-input {
+  @apply w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-brand-blue focus:ring-4 focus:ring-brand-blue/10;
+}
+
+.form-label {
+  @apply mb-2 block text-sm font-bold text-slate-800;
+}
