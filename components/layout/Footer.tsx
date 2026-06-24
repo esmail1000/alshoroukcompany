@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { siteConfig } from "@/lib/site";
 import type { Locale } from "@/lib/i18n";
@@ -19,7 +20,7 @@ export default function Footer({ locale, dictionary }: FooterProps) {
         <div className="container-padded grid gap-10 py-14 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
             <div className="mb-5 inline-flex items-center gap-3 rounded-3xl bg-white p-3 shadow-soft">
-              <img src={siteConfig.logo} alt="Alshorouk Logo" className="h-16 w-16 object-contain" />
+              <Image src={siteConfig.logo} alt="Alshorouk Logo" width={64} height={64} className="h-16 w-16 object-contain" />
               <div>
                 <strong className="block text-brand-navy">
                   {locale === "ar" ? siteConfig.name : siteConfig.englishName}
@@ -82,7 +83,7 @@ export default function Footer({ locale, dictionary }: FooterProps) {
         </div>
       </div>
 
-      <div className="border-t border-white/10 py-5">
+      <div className="border-t border-white/10 pb-24 pt-5 lg:py-5">
         <div className="container-padded flex flex-col items-center justify-between gap-3 text-center text-xs text-white/70 md:flex-row">
           <p>
             © {year} {locale === "ar" ? siteConfig.name : siteConfig.englishName}. {dictionary.footer.rights}.

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "@/lib/i18n";
 import type { Product } from "@/data/content";
@@ -15,10 +16,12 @@ export default function ProductCard({ product, locale }: ProductCardProps) {
     <article className="group overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-card transition hover:-translate-y-1 hover:border-brand-blue/40 hover:shadow-soft">
       {/* عند الضغط على صورة أو عنوان المنتج ينتقل المستخدم إلى صفحة التفاصيل */}
       <Link href={productHref} className="relative block h-60 overflow-hidden bg-slate-100">
-        <img
+        <Image
           src={product.image}
           alt={product.title}
-          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+          fill
+          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+          className="object-cover transition duration-500 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/75 via-brand-navy/20 to-transparent" />
         <h3 className="absolute bottom-5 start-5 pe-5 text-2xl font-black leading-tight text-white">

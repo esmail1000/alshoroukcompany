@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -49,14 +50,17 @@ export default function Header({ locale, navLinks, cta, languageLabel }: HeaderP
         </div>
       </div>
 
-      <div className="container-padded flex h-20 items-center justify-between gap-4">
+      <div className="container-padded flex h-16 items-center justify-between gap-3 lg:h-20 lg:gap-4">
         {/* Logo */}
         <Link href={`/${locale}`} className="flex shrink-0 items-center gap-3" aria-label="Alshorouk home">
-          <span className="grid h-14 w-14 place-items-center rounded-2xl border border-slate-100 bg-white shadow-sm">
-            <img
+          <span className="grid h-12 w-12 place-items-center rounded-2xl border border-slate-100 bg-white shadow-sm lg:h-14 lg:w-14">
+            <Image
               src={siteConfig.logo}
               alt="Alshorouk Logo"
-              className="h-12 w-12 object-contain"
+              width={48}
+              height={48}
+              className="h-10 w-10 object-contain lg:h-12 lg:w-12"
+              priority
             />
           </span>
           <span className="hidden leading-tight sm:block">
@@ -107,7 +111,7 @@ export default function Header({ locale, navLinks, cta, languageLabel }: HeaderP
         {/* Mobile Button */}
         <button
           type="button"
-          className="grid h-11 w-11 place-items-center rounded-2xl border border-slate-200 text-2xl font-black text-brand-navy lg:hidden"
+          className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-slate-200 text-2xl font-black text-brand-navy lg:hidden"
           onClick={() => setIsOpen((value) => !value)}
           aria-label="Toggle navigation menu"
           aria-expanded={isOpen}
@@ -118,7 +122,7 @@ export default function Header({ locale, navLinks, cta, languageLabel }: HeaderP
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="border-t border-slate-200 bg-white shadow-soft lg:hidden">
+        <div className="max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-slate-200 bg-white shadow-soft lg:hidden">
           <nav className="container-padded grid gap-2 py-4" aria-label="Mobile navigation">
             {navLinks.map((link) => (
               <Link
@@ -145,6 +149,22 @@ export default function Header({ locale, navLinks, cta, languageLabel }: HeaderP
               >
                 {cta}
               </Link>
+            </div>
+            <div className="grid gap-2 pt-2 sm:grid-cols-2">
+              <a
+                href={siteConfig.phoneHref}
+                className="rounded-2xl bg-slate-50 px-4 py-3 text-center text-sm font-black text-brand-navy"
+              >
+                {siteConfig.phoneDisplay}
+              </a>
+              <a
+                href={`https://wa.me/${siteConfig.whatsappNumber}`}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-2xl bg-brand-blue px-4 py-3 text-center text-sm font-black text-white"
+              >
+                {locale === "ar" ? "واتساب" : "WhatsApp"}
+              </a>
             </div>
           </nav>
         </div>

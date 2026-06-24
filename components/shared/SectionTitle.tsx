@@ -18,7 +18,7 @@ export default function SectionTitle({
       <span className="mb-4 inline-flex rounded-full bg-brand-blue/10 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-brand-deep">
         {label}
       </span>
-      <h2 className={light ? "text-3xl font-black leading-tight text-white md:text-4xl" : "text-3xl font-black leading-tight text-brand-navy md:text-4xl"}>
+      <h2 className={light ? "text-2xl font-black leading-tight text-white sm:text-3xl md:text-4xl" : "text-2xl font-black leading-tight text-brand-navy sm:text-3xl md:text-4xl"}>
         {title}
       </h2>
       {description && (

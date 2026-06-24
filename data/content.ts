@@ -4,6 +4,7 @@ export type ProductVariant = {
   title: string;
   description: string;
   image: string;
+  images?: readonly string[];
   sizes: readonly string[];
   applications?: readonly string[];
   features?: readonly string[];
@@ -70,7 +71,7 @@ export const content = {
         "منتجات مطابقة للمواصفات",
         "كميات كبيرة حسب الطلب"
       ],
-      cardNote: "ممثلو التسويق والمبيعات لدى مصانع الشروق والهلال وسينا"
+      cardNote: "ممثلو التسويق والمبيعات لدى مصانع الشروق وسينا"
     },
     about: {
       sectionLabel: "من نحن",
@@ -80,7 +81,6 @@ export const content = {
       plantsTitle: "مصانعنا",
       plants: [
         "مصنع الشروق لجميع المنتجات الأسمنتية والطوب الطفلي",
-        "مصنع الهلال لجميع المنتجات الأسمنتية",
         "مصنع سينا للطوب الطفلي"
       ],
       extra:
@@ -435,29 +435,148 @@ export const content = {
         slug: "interlock",
         title: "إنترلوك",
         description:
-          "إنترلوك متداخل بأشكال عملية للمداخل والأرصفة والممرات والمساحات الخارجية.",
-        usage: "الاستخدام: الأرصفة، الحدائق، المداخل، اللاندسكيب.",
-        specs: "الألوان والأشكال: حسب التصميم والطلب.",
-        image: "/images/products/interlock.webp",
+          "إنترلوك متداخل بأشكال متعددة مثل حرف S وحرف I والسداسي والباركيه، مناسب للأرصفة والمداخل والحدائق واللاندسكيب.",
+        usage: "الاستخدام: الأرصفة، الحدائق، المداخل، الجراجات، الممرات، واللاندسكيب.",
+        specs: "الأشكال: حرف S / حرف I / سداسي / باركيه - السماكة: 6 أو 8 سم - الألوان: جميع الألوان متاحة.",
+        image: "/images/products/interlock-i-gray.webp",
         details:
-          "الإنترلوك مناسب للأرصفة والمداخل والممرات واللاندسكيب، ويتميز بتعدد الأشكال وإمكانية تنسيق الألوان حسب التصميم المطلوب. نوفر حلول توريد مناسبة للمشروعات السكنية والتجارية والمرافق الخارجية.",
+          "توفر شركة الشروق إنترلوك عالي الجودة بأشكال وألوان متعددة ليناسب أعمال الأرصفة والمداخل والحدائق والجراجات والممرات والمساحات الخارجية. جميع الألوان متاحة حسب التصميم، ويتم تحديد الإجهاد طبقًا للمواصفات المطلوبة للمشروع.",
         sizes: [
-          "أشكال متعددة حسب التصميم المطلوب",
-          "ألوان وسماكات حسب المتاح وطلب المشروع",
-          "مقاسات تنفيذية مناسبة للأرصفة والمداخل",
-          "يتم مراجعة التصميم قبل اعتماد الكمية"
+          "إنترلوك حرف S: الأبعاد 24 × 12 سم - السمك 6 أو 8 سم - عدد الوحدات 35 وحدة/م²",
+          "إنترلوك حرف I: الأبعاد 20 × 16.5 سم - السمك 6 أو 8 سم - عدد الوحدات 36 وحدة/م²",
+          "إنترلوك سداسي: الأبعاد 23 × 20 سم - السمك 6 أو 8 سم - عدد الوحدات 29 وحدة/م²",
+          "إنترلوك باركيه: الأبعاد 20 × 10 سم - السمك 6 أو 8 سم - عدد الوحدات 50 وحدة/م²",
+          "الوزن: من 135 إلى 175 كجم/م² حسب السماكة",
+          "متوسط الامتصاص: 6%",
+          "الألوان: جميع الألوان متاحة"
         ],
         applications: [
           "الأرصفة والمداخل",
           "الحدائق واللاندسكيب",
           "الممرات والمساحات الخارجية",
+          "الجراجات وساحات الانتظار",
           "المشروعات السكنية والتجارية"
         ],
         features: [
-          "مظهر جمالي منظم",
-          "أشكال وألوان متعددة",
-          "مناسب للمساحات الخارجية",
-          "عملي في الصيانة والاستبدال"
+          "أشكال متعددة تناسب التصميمات المختلفة",
+          "ألوان متعددة حسب طلب العميل",
+          "سماكات 6 و8 سم حسب الاستخدام",
+          "مناسب للمشروعات والكميات الكبيرة",
+          "سهولة في الصيانة والاستبدال"
+        ],
+        variants: [
+          {
+            title: "إنترلوك حرف S",
+            description:
+              "إنترلوك حرف S مناسب للأرصفة والممرات والحدائق والمساحات الخارجية، ويتميز بشكل متداخل يعطي ثباتًا ومظهرًا منظمًا.",
+            image: "/images/products/interlock-s-gray.webp",
+            sizes: [
+              "الأبعاد: 24 × 12 سم",
+              "سمك الوحدة: 6 أو 8 سم",
+              "الوزن: 135 – 175 كجم/م²",
+              "عدد الوحدات/م²: 35",
+              "متوسط الامتصاص: 6%",
+              "مساحة القطعة: 260 سم²",
+              "الإجهاد: حسب المواصفات المطلوبة",
+              "الألوان: جميع الألوان متاحة"
+            ],
+            applications: [
+              "الأرصفة والممرات",
+              "الحدائق واللاندسكيب",
+              "المداخل والمساحات الخارجية"
+            ],
+            features: [
+              "شكل متداخل عملي",
+              "متوفر بسماكات 6 و8 سم",
+              "ألوان متعددة حسب التصميم"
+            ]
+          },
+          {
+            title: "إنترلوك حرف I",
+            description:
+              "إنترلوك حرف I مناسب للمداخل والجراجات والممرات، ومتواجد بألوان متعددة ويتم عرض الألوان المختلفة لنفس النوع مع نفس المواصفات.",
+            image: "/images/products/interlock-i-gray.webp",
+            images: [
+              "/images/products/interlock-i-gray.webp",
+              "/images/products/interlock-i-red.webp"
+            ],
+            sizes: [
+              "الأبعاد: 20 × 16.5 سم",
+              "سمك الوحدة: 6 أو 8 سم",
+              "الوزن: 135 – 175 كجم/م²",
+              "عدد الوحدات/م²: 36",
+              "متوسط الامتصاص: 6%",
+              "مساحة القطعة: 280 سم²",
+              "الإجهاد: حسب المواصفات المطلوبة",
+              "الألوان: جميع الألوان متاحة"
+            ],
+            applications: [
+              "المداخل والجراجات",
+              "الأرصفة والممرات",
+              "المشروعات السكنية والتجارية"
+            ],
+            features: [
+              "شكل قوي ومناسب للاستخدام العملي",
+              "متوفر بألوان متعددة",
+              "توريد حسب الكمية والموقع"
+            ]
+          },
+          {
+            title: "إنترلوك سداسي",
+            description:
+              "إنترلوك سداسي يعطي مظهرًا جماليًا منظمًا للممرات والحدائق واللاندسكيب، مع إمكانية اختيار اللون المناسب للتصميم.",
+            image: "/images/products/interlock-hex-gray.webp",
+            images: [
+              "/images/products/interlock-hex-gray.webp",
+              "/images/products/interlock-hex-red.webp"
+            ],
+            sizes: [
+              "الأبعاد: 23 × 20 سم",
+              "سمك الوحدة: 6 أو 8 سم",
+              "الوزن: 135 – 175 كجم/م²",
+              "عدد الوحدات/م²: 29",
+              "متوسط الامتصاص: 6%",
+              "مساحة القطعة: 345 سم²",
+              "الإجهاد: حسب المواصفات المطلوبة",
+              "الألوان: جميع الألوان متاحة"
+            ],
+            applications: [
+              "الحدائق واللاندسكيب",
+              "الأرصفة والممرات",
+              "المساحات الخارجية"
+            ],
+            features: [
+              "شكل سداسي جمالي",
+              "ألوان متعددة حسب الطلب",
+              "مناسب للتصميمات الخارجية"
+            ]
+          },
+          {
+            title: "إنترلوك باركيه",
+            description:
+              "إنترلوك باركيه مناسب للأرصفة والمداخل والممرات التي تحتاج شكلًا منتظمًا وسهل التركيب.",
+            image: "/images/products/interlock-parquet-gray.webp",
+            sizes: [
+              "الأبعاد: 20 × 10 سم",
+              "سمك الوحدة: 6 أو 8 سم",
+              "الوزن: 135 – 175 كجم/م²",
+              "عدد الوحدات/م²: 50",
+              "متوسط الامتصاص: 6%",
+              "مساحة القطعة: 200 سم²",
+              "الإجهاد: حسب المواصفات المطلوبة",
+              "الألوان: جميع الألوان متاحة"
+            ],
+            applications: [
+              "الأرصفة والممرات",
+              "المداخل والمساحات الخارجية",
+              "أعمال اللاندسكيب"
+            ],
+            features: [
+              "شكل منتظم وسهل التنسيق",
+              "عدد وحدات مناسب للمتر المربع",
+              "متوفر بسماكات وألوان متعددة"
+            ]
+          }
         ]
       },
       {
@@ -618,7 +737,7 @@ export const content = {
       sectionLabel: "المعرض",
       title: "صور من المصنع والمنتجات والتوريد",
       description:
-        "يمكنك استبدال هذه الصور بصور المصنع والتحميل والمشروعات الفعلية."
+        ""
     },
     gallery: [
       {
@@ -1128,29 +1247,148 @@ export const content = {
         slug: "interlock",
         title: "Interlock Pavers",
         description:
-          "Interlocking pavers with practical shapes for entrances, sidewalks, pathways, and outdoor areas.",
-        usage: "Usage: sidewalks, gardens, entrances, and landscaping.",
-        specs: "Colors and shapes: according to design and request.",
-        image: "/images/products/interlock.webp",
+          "Interlock pavers in multiple shapes such as S shape, I shape, hexagonal, and parquet, suitable for sidewalks, entrances, gardens, and landscaping.",
+        usage: "Usage: sidewalks, gardens, entrances, garages, pathways, and landscaping.",
+        specs: "Shapes: S shape / I shape / Hexagonal / Parquet - Thickness: 6 or 8 cm - Colors: all colors available.",
+        image: "/images/products/interlock-i-gray.webp",
         details:
-          "Interlock pavers are suitable for sidewalks, entrances, pathways, and landscaping. Shapes and colors can be coordinated based on the required design and project needs.",
+          "Alshorouk supplies high-quality interlock pavers in multiple shapes and colors for sidewalks, entrances, gardens, garages, pathways, and outdoor areas. All colors are available according to the required design, and strength is supplied according to project specifications.",
         sizes: [
-          "Multiple shapes based on design requirements",
-          "Colors and thicknesses based on availability and request",
-          "Execution sizes suitable for sidewalks and entrances",
-          "Design is reviewed before quantity approval"
+          "S shape interlock: 24 × 12 cm - thickness 6 or 8 cm - 35 units/m²",
+          "I shape interlock: 20 × 16.5 cm - thickness 6 or 8 cm - 36 units/m²",
+          "Hexagonal interlock: 23 × 20 cm - thickness 6 or 8 cm - 29 units/m²",
+          "Parquet interlock: 20 × 10 cm - thickness 6 or 8 cm - 50 units/m²",
+          "Weight: 135 – 175 kg/m² depending on thickness",
+          "Average absorption: 6%",
+          "Colors: all colors available"
         ],
         applications: [
           "Sidewalks and entrances",
           "Gardens and landscaping",
           "Pathways and outdoor spaces",
+          "Garages and parking areas",
           "Residential and commercial projects"
         ],
         features: [
-          "Organized visual appearance",
-          "Multiple shapes and colors",
-          "Suitable for outdoor areas",
+          "Multiple shapes for different designs",
+          "Multiple colors according to request",
+          "6 and 8 cm thickness options",
+          "Suitable for project-scale supply",
           "Practical maintenance and replacement"
+        ],
+        variants: [
+          {
+            title: "S Shape Interlock",
+            description:
+              "S shape interlock is suitable for sidewalks, pathways, gardens, and outdoor areas, with an interlocking shape that gives stability and an organized appearance.",
+            image: "/images/products/interlock-s-gray.webp",
+            sizes: [
+              "Dimensions: 24 × 12 cm",
+              "Unit thickness: 6 or 8 cm",
+              "Weight: 135 – 175 kg/m²",
+              "Units/m²: 35",
+              "Average absorption: 6%",
+              "Piece area: 260 cm²",
+              "Strength: according to required specifications",
+              "Colors: all colors available"
+            ],
+            applications: [
+              "Sidewalks and pathways",
+              "Gardens and landscaping",
+              "Entrances and outdoor areas"
+            ],
+            features: [
+              "Practical interlocking shape",
+              "Available in 6 and 8 cm thickness",
+              "Multiple colors according to design"
+            ]
+          },
+          {
+            title: "I Shape Interlock",
+            description:
+              "I shape interlock is suitable for entrances, garages, and pathways. Different colors for the same type are displayed together with the same specifications.",
+            image: "/images/products/interlock-i-gray.webp",
+            images: [
+              "/images/products/interlock-i-gray.webp",
+              "/images/products/interlock-i-red.webp"
+            ],
+            sizes: [
+              "Dimensions: 20 × 16.5 cm",
+              "Unit thickness: 6 or 8 cm",
+              "Weight: 135 – 175 kg/m²",
+              "Units/m²: 36",
+              "Average absorption: 6%",
+              "Piece area: 280 cm²",
+              "Strength: according to required specifications",
+              "Colors: all colors available"
+            ],
+            applications: [
+              "Entrances and garages",
+              "Sidewalks and pathways",
+              "Residential and commercial projects"
+            ],
+            features: [
+              "Strong practical shape",
+              "Available in multiple colors",
+              "Supply according to quantity and site"
+            ]
+          },
+          {
+            title: "Hexagonal Interlock",
+            description:
+              "Hexagonal interlock provides an organized decorative appearance for pathways, gardens, and landscaping, with color selection according to the project design.",
+            image: "/images/products/interlock-hex-gray.webp",
+            images: [
+              "/images/products/interlock-hex-gray.webp",
+              "/images/products/interlock-hex-red.webp"
+            ],
+            sizes: [
+              "Dimensions: 23 × 20 cm",
+              "Unit thickness: 6 or 8 cm",
+              "Weight: 135 – 175 kg/m²",
+              "Units/m²: 29",
+              "Average absorption: 6%",
+              "Piece area: 345 cm²",
+              "Strength: according to required specifications",
+              "Colors: all colors available"
+            ],
+            applications: [
+              "Gardens and landscaping",
+              "Sidewalks and pathways",
+              "Outdoor areas"
+            ],
+            features: [
+              "Decorative hexagonal shape",
+              "Multiple colors according to request",
+              "Suitable for outdoor designs"
+            ]
+          },
+          {
+            title: "Parquet Interlock",
+            description:
+              "Parquet interlock is suitable for sidewalks, entrances, and pathways that require a regular shape and easy layout.",
+            image: "/images/products/interlock-parquet-gray.webp",
+            sizes: [
+              "Dimensions: 20 × 10 cm",
+              "Unit thickness: 6 or 8 cm",
+              "Weight: 135 – 175 kg/m²",
+              "Units/m²: 50",
+              "Average absorption: 6%",
+              "Piece area: 200 cm²",
+              "Strength: according to required specifications",
+              "Colors: all colors available"
+            ],
+            applications: [
+              "Sidewalks and pathways",
+              "Entrances and outdoor areas",
+              "Landscaping works"
+            ],
+            features: [
+              "Regular shape and easy coordination",
+              "Suitable units per square meter",
+              "Available in multiple thicknesses and colors"
+            ]
+          }
         ]
       },
       {

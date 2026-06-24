@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import MobileFloatingActions from "@/components/layout/MobileFloatingActions";
 import { getContent } from "@/data/content";
 import { getDirection, isLocale, locales, type Locale } from "@/lib/i18n";
 import { siteConfig } from "@/lib/site";
+import { buildSeoMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -21,17 +23,13 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
   const locale = params.locale as Locale;
   const dictionary = getContent(locale);
 
-  return {
+  return buildSeoMetadata({
+    locale,
+    path: "",
     title: dictionary.seo.title,
     description: dictionary.seo.description,
-    openGraph: {
-      title: dictionary.seo.title,
-      description: dictionary.seo.description,
-      type: "website",
-      locale: locale === "ar" ? "ar_EG" : "en_US",
-      images: [siteConfig.logo]
-    }
-  };
+    image: siteConfig.ogImage
+  });
 }
 
 export default function LocaleLayout({
@@ -49,8 +47,9 @@ export default function LocaleLayout({
   return (
     <div dir={getDirection(locale)} lang={locale} className="min-h-screen bg-white">
       <Header locale={locale} navLinks={dictionary.nav} cta={dictionary.cta} languageLabel={dictionary.languageLabel} />
-      <main>{children}</main>
+      <main className="pb-20 lg:pb-0">{children}</main>
       <Footer locale={locale} dictionary={dictionary} />
+      <MobileFloatingActions locale={locale} />
     </div>
   );
 }

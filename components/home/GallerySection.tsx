@@ -1,3 +1,4 @@
+import Image from "next/image";
 import SectionTitle from "@/components/shared/SectionTitle";
 import type { getContent } from "@/data/content";
 
@@ -16,9 +17,15 @@ export default function GallerySection({ dictionary }: { dictionary: Dictionary 
           {dictionary.gallery.map((item, index) => (
             <article
               key={item.title}
-              className={index === 0 ? "group relative overflow-hidden rounded-[2rem] shadow-card md:col-span-2" : "group relative overflow-hidden rounded-[2rem] shadow-card"}
+              className={index === 0 ? "group relative h-56 overflow-hidden rounded-[1.5rem] shadow-card sm:h-72 sm:rounded-[2rem] md:col-span-2" : "group relative h-56 overflow-hidden rounded-[1.5rem] shadow-card sm:h-72 sm:rounded-[2rem]"}
             >
-              <img src={item.image} alt={item.title} className="h-72 w-full object-cover transition duration-500 group-hover:scale-105" />
+              <Image
+                src={item.image}
+                alt={item.title}
+                fill
+                sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                className="object-cover transition duration-500 group-hover:scale-105"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/70 via-transparent to-transparent" />
               <h3 className="absolute bottom-5 start-5 text-lg font-black text-white">{item.title}</h3>
             </article>

@@ -15,7 +15,7 @@ export default function QuoteSection({
   return (
     <section id="quote" className="section-padding bg-white">
       <div className="container-padded grid items-start gap-10 lg:grid-cols-[0.85fr_1.15fr]">
-        <div className="sticky top-28 rounded-[2rem] bg-brand-navy p-8 text-white shadow-soft">
+        <div className="rounded-[2rem] bg-brand-navy p-6 text-white shadow-soft lg:sticky lg:top-28 lg:p-8">
           <SectionTitle
             label={dictionary.quote.sectionLabel}
             title={dictionary.quote.title}

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import QuoteSection from "@/components/home/QuoteSection";
@@ -6,6 +7,7 @@ import SectionTitle from "@/components/shared/SectionTitle";
 import { getContent, type Product, type ProductVariant } from "@/data/content";
 import { isLocale, type Locale } from "@/lib/i18n";
 import { siteConfig } from "@/lib/site";
+import { buildSeoMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
   return (["ar", "en"] as Locale[]).flatMap((locale) =>
@@ -19,15 +21,49 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { locale: string; slug: string } }) {
   if (!isLocale(params.locale)) return {};
 
-  const dictionary = getContent(params.locale as Locale);
+  const locale = params.locale as Locale;
+  const dictionary = getContent(locale);
   const product = dictionary.products.find((item) => item.slug === params.slug) as Product | undefined;
 
   if (!product) return {};
 
-  return {
-    title: `${product.title} | ${params.locale === "ar" ? siteConfig.name : siteConfig.englishName}`,
-    description: product.description
+  const productSeoTitles: Record<string, { ar: string; en: string }> = {
+    "red-clay-bricks": {
+      ar: "الطوب الأحمر الطفلي | المقاسات والاستخدامات",
+      en: "Red Clay Bricks | Sizes and Uses"
+    },
+    "cement-bricks": {
+      ar: "الطوب الأسمنتي المصمت | المواصفات والمقاسات",
+      en: "Solid Cement Bricks | Specifications and Sizes"
+    },
+    blocks: {
+      ar: "البلوك الخرساني المفرغ | المقاسات والمواصفات",
+      en: "Hollow Concrete Blocks | Sizes and Specifications"
+    },
+    interlock: {
+      ar: "الإنترلوك | الأشكال والسماكات والألوان",
+      en: "Interlock Pavers | Shapes, Thicknesses and Colors"
+    },
+    curbstones: {
+      ar: "البردورات الخرسانية | الحدائق والأرصفة والطرق",
+      en: "Concrete Curbstones | Gardens, Sidewalks and Roads"
+    },
+    "custom-products": {
+      ar: "منتجات خرسانية حسب الطلب | تصنيع خاص للمشروعات",
+      en: "Custom Concrete Products | Special Project Manufacturing"
+    }
   };
+
+  const title = productSeoTitles[product.slug]?.[locale] || `${product.title} | ${locale === "ar" ? siteConfig.name : siteConfig.englishName}`;
+
+  return buildSeoMetadata({
+    locale,
+    path: `/products/${product.slug}`,
+    title: `${title} | ${locale === "ar" ? siteConfig.name : siteConfig.englishName}`,
+    description: product.description,
+    image: product.image,
+    keywords: [product.title, product.usage, product.specs, locale === "ar" ? siteConfig.name : siteConfig.englishName]
+  });
 }
 
 export default function ProductDetailsPage({
@@ -95,7 +131,7 @@ export default function ProductDetailsPage({
     <>
       <section className="relative overflow-hidden bg-brand-navy text-white">
         <div className="absolute inset-0 opacity-15 brick-pattern" />
-        <div className="container-padded relative grid items-center gap-10 py-16 lg:grid-cols-[1fr_0.9fr] lg:py-24">
+        <div className="container-padded relative grid items-center gap-8 py-12 sm:py-16 lg:grid-cols-[1fr_0.9fr] lg:gap-10 lg:py-24">
           <div>
             <div className="mb-6 flex flex-wrap items-center gap-3 text-sm font-black text-white/75">
               <Link href={`/${locale}/products`} className="transition hover:text-white">
@@ -105,10 +141,10 @@ export default function ProductDetailsPage({
               <span className="text-white">{product.title}</span>
             </div>
             <p className="mb-4 text-sm font-black text-brand-blue">{dictionary.productsSection.sectionLabel}</p>
-            <h1 className="max-w-3xl text-4xl font-black leading-tight md:text-5xl">
+            <h1 className="max-w-3xl text-3xl font-black leading-tight sm:text-4xl md:text-5xl">
               {product.title}
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-9 text-white/80">
+            <p className="mt-5 max-w-2xl text-base leading-8 text-white/80 sm:text-lg sm:leading-9">
               {product.description}
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -129,21 +165,26 @@ export default function ProductDetailsPage({
             </div>
           </div>
 
-          <div className="overflow-hidden rounded-[2.25rem] border border-white/15 bg-white p-4 shadow-soft">
-            <img
-              src={product.image}
-              alt={product.title}
-              className="h-[360px] w-full rounded-[1.75rem] object-cover lg:h-[460px]"
-            />
+          <div className="overflow-hidden rounded-[1.75rem] border border-white/15 bg-white p-3 shadow-soft sm:rounded-[2.25rem] sm:p-4">
+            <div className="relative h-[260px] w-full overflow-hidden rounded-[1.5rem] sm:h-[360px] sm:rounded-[1.75rem] lg:h-[460px]">
+              <Image
+                src={product.image}
+                alt={product.title}
+                fill
+                priority
+                sizes="(min-width: 1024px) 45vw, 100vw"
+                className="object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>
 
       <section className="section-padding bg-white">
         <div className="container-padded grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-          <article className="rounded-[2rem] border border-slate-200 bg-white p-7 shadow-card md:p-10">
+          <article className="rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-card sm:rounded-[2rem] md:p-10">
             <p className="mb-3 text-sm font-black text-brand-blue">{labels.details}</p>
-            <h2 className="mb-5 text-3xl font-black text-brand-navy">{product.title}</h2>
+            <h2 className="mb-5 text-2xl font-black text-brand-navy sm:text-3xl">{product.title}</h2>
             <p className="text-base leading-9 text-slate-600">{product.details}</p>
 
             <div className="mt-8 grid gap-4 md:grid-cols-2">
@@ -152,7 +193,7 @@ export default function ProductDetailsPage({
             </div>
           </article>
 
-          <aside className="rounded-[2rem] border border-slate-200 bg-slate-50 p-7 shadow-card md:p-8">
+          <aside className="rounded-[1.75rem] border border-slate-200 bg-slate-50 p-5 shadow-card sm:rounded-[2rem] md:p-8">
             <h2 className="mb-5 text-2xl font-black text-brand-navy">{labels.sizes}</h2>
             <ul className="grid gap-3">
               {product.sizes.map((size) => (
@@ -371,7 +412,7 @@ function CustomProductsPage({
     <>
       <section className="relative overflow-hidden bg-brand-navy text-white">
         <div className="absolute inset-0 opacity-15 brick-pattern" />
-        <div className="container-padded relative grid items-center gap-10 py-16 lg:grid-cols-[1fr_0.9fr] lg:py-24">
+        <div className="container-padded relative grid items-center gap-8 py-12 sm:py-16 lg:grid-cols-[1fr_0.9fr] lg:gap-10 lg:py-24">
           <div>
             <div className="mb-6 flex flex-wrap items-center gap-3 text-sm font-black text-white/75">
               <Link href={`/${locale}/products`} className="transition hover:text-white">
@@ -383,10 +424,10 @@ function CustomProductsPage({
             <p className="mb-4 inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-black text-brand-blue">
               {labels.badge}
             </p>
-            <h1 className="max-w-3xl text-4xl font-black leading-tight md:text-5xl">
+            <h1 className="max-w-3xl text-3xl font-black leading-tight sm:text-4xl md:text-5xl">
               {labels.title}
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-9 text-white/80">
+            <p className="mt-5 max-w-2xl text-base leading-8 text-white/80 sm:text-lg sm:leading-9">
               {labels.subtitle}
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -407,12 +448,17 @@ function CustomProductsPage({
             </div>
           </div>
 
-          <div className="overflow-hidden rounded-[2.25rem] border border-white/15 bg-white p-4 shadow-soft">
-            <img
-              src={product.image}
-              alt={product.title}
-              className="h-[360px] w-full rounded-[1.75rem] object-contain p-4 lg:h-[460px]"
-            />
+          <div className="overflow-hidden rounded-[1.75rem] border border-white/15 bg-white p-3 shadow-soft sm:rounded-[2.25rem] sm:p-4">
+            <div className="relative h-[260px] w-full overflow-hidden rounded-[1.5rem] sm:h-[360px] sm:rounded-[1.75rem] lg:h-[460px]">
+              <Image
+                src={product.image}
+                alt={product.title}
+                fill
+                priority
+                sizes="(min-width: 1024px) 45vw, 100vw"
+                className="object-contain p-4"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -439,7 +485,7 @@ function CustomProductsPage({
 
       <section className="section-padding bg-slate-50">
         <div className="container-padded grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-          <article className="rounded-[2rem] border border-slate-200 bg-white p-7 shadow-card md:p-10">
+          <article className="rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-card sm:rounded-[2rem] md:p-10">
             <p className="mb-3 text-sm font-black text-brand-blue">{labels.stepsLabel}</p>
             <h2 className="mb-8 text-3xl font-black text-brand-navy">{labels.stepsTitle}</h2>
             <div className="grid gap-4">
@@ -454,7 +500,7 @@ function CustomProductsPage({
             </div>
           </article>
 
-          <article className="rounded-[2rem] border border-slate-200 bg-white p-7 shadow-card md:p-10">
+          <article className="rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-card sm:rounded-[2rem] md:p-10">
             <p className="mb-3 text-sm font-black text-brand-blue">{labels.requiredLabel}</p>
             <h2 className="mb-6 text-3xl font-black text-brand-navy">{labels.requiredTitle}</h2>
             <p className="mb-6 text-sm leading-8 text-slate-600">{product.details}</p>
@@ -539,21 +585,30 @@ function VariantCard({
       ? `أرغب في طلب عرض سعر لنوع: ${variant.title}`
       : `I would like to request a quote for this type: ${variant.title}`
   );
+  const variantImages = variant.images?.length ? variant.images : [variant.image];
 
   return (
     <article className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-card transition hover:-translate-y-1 hover:border-brand-blue/40 hover:shadow-soft">
       <div className="grid gap-0 md:grid-cols-[0.95fr_1.05fr]">
-        <div className="h-72 bg-slate-100 md:h-full">
-          <img
-            src={variant.image}
-            alt={variant.title}
-            className="h-full w-full object-contain p-4"
-          />
+        <div className="bg-slate-100 p-3">
+          <div className={variantImages.length > 1 ? "grid h-full min-h-64 grid-cols-1 gap-3 sm:grid-cols-2 md:min-h-72" : "h-64 sm:h-72 md:h-full"}>
+            {variantImages.map((image) => (
+              <div key={image} className="relative min-h-56 rounded-[1.5rem] bg-white sm:min-h-64">
+                <Image
+                  src={image}
+                  alt={variant.title}
+                  fill
+                  sizes="(min-width: 1024px) 25vw, (min-width: 768px) 45vw, 100vw"
+                  className="object-contain p-4"
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="space-y-5 p-6 md:p-8">
+        <div className="space-y-5 p-5 sm:p-6 md:p-8">
           <div>
-            <h3 className="text-2xl font-black text-brand-navy">{variant.title}</h3>
+            <h3 className="text-xl font-black text-brand-navy sm:text-2xl">{variant.title}</h3>
             <p className="mt-3 text-sm leading-7 text-slate-600">{variant.description}</p>
           </div>
 
@@ -604,7 +659,7 @@ function InfoCard({
   const borderClass = accent === "blue" ? "border-brand-blue" : "border-brand-brick";
 
   return (
-    <div className="rounded-[1.5rem] border border-slate-200 bg-slate-50 p-5">
+    <div className="rounded-[1.5rem] border border-slate-200 bg-slate-50 p-4 sm:p-5">
       <h3 className="mb-4 text-xl font-black text-brand-navy">{title}</h3>
       <ul className="grid gap-3">
         {items.map((item) => (

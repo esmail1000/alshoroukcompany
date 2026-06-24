@@ -40,22 +40,43 @@ export default function ContactSection({
           </div>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <a className="rounded-full bg-white px-5 py-3 text-sm font-bold text-brand-navy shadow-sm transition hover:text-brand-blue" href={siteConfig.facebook}>
-              Facebook
-            </a>
-            <a className="rounded-full bg-white px-5 py-3 text-sm font-bold text-brand-navy shadow-sm transition hover:text-brand-blue" href={siteConfig.instagram}>
-              Instagram
-            </a>
-            <a className="rounded-full bg-white px-5 py-3 text-sm font-bold text-brand-navy shadow-sm transition hover:text-brand-blue" href={siteConfig.linkedin}>
-              LinkedIn
-            </a>
+            {siteConfig.facebook && (
+              <a
+                className="rounded-full bg-white px-5 py-3 text-sm font-bold text-brand-navy shadow-sm transition hover:text-brand-blue"
+                href={siteConfig.facebook}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Facebook
+              </a>
+            )}
+            {siteConfig.instagram && (
+              <a
+                className="rounded-full bg-white px-5 py-3 text-sm font-bold text-brand-navy shadow-sm transition hover:text-brand-blue"
+                href={siteConfig.instagram}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Instagram
+              </a>
+            )}
+            {siteConfig.linkedin && (
+              <a
+                className="rounded-full bg-white px-5 py-3 text-sm font-bold text-brand-navy shadow-sm transition hover:text-brand-blue"
+                href={siteConfig.linkedin}
+                target="_blank"
+                rel="noreferrer"
+              >
+                LinkedIn
+              </a>
+            )}
           </div>
         </div>
 
         <div className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-3 shadow-card">
           <iframe
             src={siteConfig.mapEmbedUrl}
-            className="h-[460px] w-full rounded-[1.5rem] border-0"
+            className="h-[320px] w-full rounded-[1.5rem] border-0 sm:h-[460px]"
             loading="lazy"
             allowFullScreen
             referrerPolicy="no-referrer-when-downgrade"
@@ -71,7 +92,7 @@ function ContactItem({ label, value, href }: { label: string; value: string; hre
   const content = (
     <div className="rounded-2xl bg-white p-5 shadow-sm transition hover:shadow-card">
       <span className="mb-1 block text-xs font-black uppercase tracking-[0.16em] text-brand-blue">{label}</span>
-      <strong className="text-base text-brand-navy">{value}</strong>
+      <strong className="break-words text-base text-brand-navy">{value}</strong>
     </div>
   );
 
